@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Duels Trial Mod Guide</title>
+    <style>
+        :root {
+            --primary: #2a3a5e;
+            --secondary: #4a6baf;
+            --accent: #3d8af7;
+            --text: #e0e7ff;
+            --background: #121a2b;
+            --card-bg: #1a243f;
+            --highlight: #3d8af755;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(61, 138, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(61, 138, 247, 0.1) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(61, 138, 247, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 3px;
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        p, li {
+            margin-bottom: 0.8rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        a:hover {
+            text-shadow: 0 0 5px var(--accent);
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        ul, ol {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .command {
+            background-color: var(--highlight);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #b3d4ff;
+        }
+        
+        .channel {
+            color: #7289da;
+            background-color: rgba(114, 137, 218, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .note {
+            background-color: rgba(247, 181, 61, 0.1);
+            border-left: 3px solid #f7b53d;
+            padding: 1rem;
+            border-radius: 0 4px 4px 0;
+            margin: 1rem 0;
+        }
+        
+        .warning {
+            background-color: rgba(247, 61, 61, 0.1);
+            border-left: 3px solid #f73d3d;
+            padding: 1rem;
+            border-radius: 0 4px 4px 0;
+            margin: 1rem 0;
+        }
+        
+        .sword-decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .sword-1 {
+            top: 50px;
+            right: 100px;
+            transform: rotate(30deg);
+        }
+        
+        .sword-2 {
+            bottom: 100px;
+            left: 100px;
+            transform: rotate(-15deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .sword-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Custom Duels Trial Moderator Guide</h1>
+            <p>Welcome to the Custom Duels moderation team! This guide will help you through your trial phase.</p>
+            
+            <svg class="sword-decoration sword-1" width="150" height="150" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.92 5H17.08L18.92 7H5.08L6.92 5Z" fill="var(--accent)"/>
+                <path d="M7 7H17V18C17 19.1 16.1 20 15 20H9C7.9 20 7 19.1 7 18V7Z" fill="var(--accent)"/>
+                <path d="M11 12H13V18H11V12Z" fill="var(--background)"/>
+            </svg>
+            
+            <svg class="sword-decoration sword-2" width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.92 5H17.08L18.92 7H5.08L6.92 5Z" fill="var(--accent)"/>
+                <path d="M7 7H17V18C17 19.1 16.1 20 15 20H9C7.9 20 7 19.1 7 18V7Z" fill="var(--accent)"/>
+                <path d="M11 12H13V18H11V12Z" fill="var(--background)"/>
+            </svg>
+        </header>
+        
+        <div class="card">
+            <h2>Welcome New Moderators</h2>
+            <p>This guide will be of great use in your journey to pass your trial phase. Please refer back to it when you feel you've forgotten any information. If anything is missing, don't hesitate to contact <strong>Cyan</strong> so the document can be updated.</p>
+        </div>
+        
+        <div class="card">
+            <h2>First Steps</h2>
+            <ol>
+                <li>Read <a href="https://discord.com/channels/518146340790992897/869886857553518592" target="_blank">[#staff-rules]</a>. These are new rules that every staff member in Custom Duels must follow, in addition to the regular rules.</li>
+                <li>Drop your time zone in <a href="https://discord.com/channels/518146340790992897/869906800512761876" target="_blank">[#timezones]</a>.</li>
+                <li>Ensure you're in both the <a href="https://discord.gg/JvrqhxkHAV" target="_blank">[support server]</a> and tutor server.</li>
+                <li>Follow this guide and you're all set!</li>
+            </ol>
+        </div>
+        
+        <div class="card">
+            <h2>Moderator Expectations</h2>
+            <h3>Punishments</h3>
+            <p>The most obvious part of your job is to punish rule-breakers. All punishments are stated in <a href="https://discord.com/channels/518146340790992897/869887432311603230" target="_blank">[#punishments]</a>.</p>
+            
+            <h3>Commands to Punish Players</h3>
+            <ul>
+                <li><strong>Ban players in-game:</strong> <span class="command">.ban (player) (rule) (reason)</span> (e.g., <span class="command">.ban cya7n g-1 Circle</span>) OR <span class="command">/ban</span> (follow the prompt on Discord). Use the Discord command for time-bans or to ban users not in-game. <strong>Log EVERY ban</strong> using <span class="command">/log create</span> (follow prompt) or <span class="command">/log add</span> if a log already exists. Always log with downloaded attachments, not links like Medal or Streamable.</li>
+                <li><strong>Kick players in-game:</strong> <span class="command">.kick (player) (reason)</span> OR <span class="command">/kick</span> (follow prompt) on Discord.</li>
+                <li><strong>Mute players in-game:</strong> <span class="command">.mute (player)</span></li>
+                <li><strong>Request tournament blacklists:</strong> <span class="command">/tournament blacklist</span> (follow prompt) on Discord.</li>
+                <li><strong>Ban players on Discord:</strong> You don't have this permission.</li>
+                <li><strong>Kick players on Discord:</strong> (rarely used) <span class="command">/kick</span> (follow prompt)</li>
+                <li><strong>Mute players on Discord:</strong> <span class="command">/mute</span> (follow prompt)</li>
+                <li><strong>Warn players on Discord:</strong> <span class="command">/warn user</span> (follow prompt)</li>
+            </ul>
+            <p>To revoke punishments, add "un" before commands (e.g., <span class="command">/tournament unblacklist</span>, <span class="command">/unmute</span>).</p>
+            
+            <h3>When and Where to Request Punishments</h3>
+            <p>Some punishments require higher permissions (resetting stats, Discord bans, banning items). Use these channels:</p>
+            <ul>
+                <li><a href="https://discord.com/channels/518146340790992897/870365723799740437" target="_blank">[#temp-punishment-farming]</a> format:
+                    <ul>
+                        <li>Farmer users:</li>
+                        <li>Farmed users:</li>
+                        <li>Clip Proof:</li>
+                        <li>Ping managers</li>
+                    </ul>
+                </li>
+                <li><a href="https://discord.com/channels/518146340790992897/1308550905624268841" target="_blank">[#discord-ban-requests]</a> format:
+                    <ul>
+                        <li>Discord ID:</li>
+                        <li>Reason:</li>
+                        <li>Evidence:</li>
+                        <li>Ping admins+</li>
+                    </ul>
+                </li>
+                <li><a href="https://discord.com/channels/518146340790992897/1141024145648386139" target="_blank">[#item-requests]</a> format:
+                    <ul>
+                        <li>Item ID:</li>
+                        <li>Ping managers</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="note">
+                <h3>Extra Information</h3>
+                <ul>
+                    <li>If unsure about banning a player (e.g., uncertain if they're exploiting), use <a href="https://discord.com/channels/518146340790992897/869923785652990003" target="_blank">[#ban-discussion]</a>. Ping @staff and provide evidence.</li>
+                    <li>If a player's logs are corrupt and unsaved, you may unban them if requested.</li>
+                    <li>Exploiting in other games doesn't warrant a Custom Duels ban.</li>
+                    <li>When banning exploiters, specify the exploit (e.g., "Circle" not "Exploiting").</li>
+                    <li>Don't re-open ban discussions. Direct users to open admin tickets for false bans or use the appeal system.</li>
+                    <li>Check blacklist/whitelist status in <a href="https://discord.com/channels/518146340790992897/869888243913588766" target="_blank">[#game-bans]</a> by typing the user's ID or username.</li>
+                    <li>Other moderation logs are in the Logs category.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Focus Groups</h2>
+            <p>Choose your focus group with <span class="command">/staff focus</span> in Discord. Request changes in the first half of the week.</p>
+            
+            <h3>Game-Focused Moderators (Weekly)</h3>
+            <ul>
+                <li>≥5 hours of game time</li>
+                <li>≥2 tickets completed</li>
+                <li>Voted on all GAME appeals (skipping ≤2 is fine)</li>
+            </ul>
+            
+            <h3>Discord-Focused Moderators (Weekly)</h3>
+            <ul>
+                <li>≥1,000 Discord messages</li>
+                <li>≥2 tickets completed</li>
+                <li>Voted on all DISCORD appeals (skipping ≤2 is fine)</li>
+            </ul>
+            
+            <h3>Combo-Focused Moderators (Weekly)</h3>
+            <ul>
+                <li>≥4 hours of game time</li>
+                <li>≥500 Discord messages</li>
+                <li>Voted on ALL appeals (skipping ≤2 is fine)</li>
+            </ul>
+            
+            <div class="note">
+                <p><strong>Note:</strong> Trial mods don't have appeal access and aren't required to vote on them.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Consequences</h2>
+            <p>Staff members who break rules receive strikes (unless the rule is severe). Three strikes within two weeks or fifteen within a year results in demotion. Strikes are removed after one year.</p>
+            <p>Admins+ impose strikes if:</p>
+            <ul>
+                <li>A staff member fails activity requirements</li>
+                <li>A staff member breaks a rule that would warrant a warning for regular members</li>
+            </ul>
+            <p>Staff are held to higher standards. What might be a time-ban for regular users could be a permanent, non-appealable ban for staff.</p>
+            <div class="warning">
+                <p>Failing all three weekly activity requirements results in three strikes (demotion). Contact managers if you believe a strike is unfair.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Going on Leave</h2>
+            <p>Staff may take two-week leaves using <span class="command">/staff leave</span>. Request leaves in the first half of the week, but return anytime. Limit one leave per month—excessive leaves may result in demotion.</p>
+        </div>
+        
+        <div class="card">
+            <h2>NSFW Guidelines</h2>
+            <p>NSFW content (profile pictures, images, videos, GIFs, etc.) is strictly prohibited.</p>
+            
+            <h3>Ban-Worthy</h3>
+            <ul>
+                <li>Full NSFW (nudity/pornography)</li>
+            </ul>
+            
+            <h3>Warning-Worthy</h3>
+            <ul>
+                <li>Implicit NSFW (implies sexual activity without nudity, sexualized content)</li>
+            </ul>
+            
+            <h3>Verbal Warning-Worthy</h3>
+            <ul>
+                <li>Mildly implicit NSFW (potentially sexual but ambiguous content)</li>
+            </ul>
+            
+            <div class="note">
+                <p>When uncertain about content, consult other staff. If no consensus is reached, ping HR with the image and message link.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Appeals (MOD+)</h2>
+            <p>Vote on appeals in <a href="https://discord.com/channels/1126251192578736333/1151919900688928838" target="_blank">[#appeals]</a>. Read each thoroughly and act accordingly. Check ban logs with <span class="command">/log get</span> (follow prompt).</p>
+            <p><a href="https://discord.com/channels/518146340790992897/869887432311603230" target="_blank">[#punishments]</a> shows if bans are appealable, but you must verify false bans and case severity. Vote honestly—you won't be punished for unpopular opinions.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Additional Information</h2>
+            <ul>
+                <li>For loss removals (due to exploiters), unreceived tend, or stat restoration, use <a href="https://discord.com/channels/518146340790992897/978825323309309952" target="_blank">[restore-requests]</a> format:
+                    <ul>
+                        <li>User and what to restore</li>
+                        <li>Reason:</li>
+                        <li>Evidence:</li>
+                        <li>Ping managers</li>
+                    </ul>
+                </li>
+                <li>Use clips/screen recordings—not pictures—for evidence.</li>
+                <li>Use the pink bot for staff commands (blue bot if unavailable).</li>
+                <li>Avoid staff commands in public channels.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Apply blue highlighting to Discord channels
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('*');
+            elements.forEach(el => {
+                if (el.childNodes.length === 1 && el.textContent.startsWith('#') && !el.hasAttribute('href')) {
+                    el.classList.add('channel');
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
